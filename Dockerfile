@@ -15,7 +15,7 @@ RUN set -xe \
 RUN set -xe \
 
     # PDO extensions
-    && docker-php-ext-install pgsql pdo_pgsql mysql \
+    && docker-php-ext-install pgsql pdo_pgsql pdo_mysql \
 
     # Xdebug
     && pecl install xdebug \
