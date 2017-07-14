@@ -21,12 +21,15 @@ RUN set -xe \
     && pecl install xdebug \
 	&& docker-php-ext-enable xdebug
 
-ENV ICUVERSION 58.2
-ENV ICU_VERSION 58_2
+ARG ICU_MAJOR_VERSION=58
+ENV ICU_MAJOR_VERSION ${ICU_MAJOR_VERSION}
+
+ARG ICU_MINOR_VERSION=2
+ENV ICU_MINOR_VERSION ${ICU_MINOR_VERSION}
 
 RUN set -xe \
     # https://github.com/docker-library/php/issues/307#issuecomment-262491765
-    && curl -sS -o /tmp/icu.tar.gz -L http://download.icu-project.org/files/icu4c/${ICUVERSION}/icu4c-${ICU_VERSION}-src.tgz \
+    && curl -sS -o /tmp/icu.tar.gz -L http://download.icu-project.org/files/icu4c/${ICU_MAJOR_VERSION}.${ICU_MINOR_VERSION}/icu4c-${ICU_MAJOR_VERSION}_${ICU_MINOR_VERSION}-src.tgz \
     && tar -zxf /tmp/icu.tar.gz -C /tmp \
     && cd /tmp/icu/source \
     && ./configure --prefix=/usr/local \
@@ -35,7 +38,8 @@ RUN set -xe \
     && docker-php-ext-configure intl --with-icu-dir=/usr/local \
     && docker-php-ext-install intl
 
-ENV APCU_VERSION 4.0.7
+ARG APCU_VERSION=4.0.7
+ENV APCU_VERSION ${APCU_VERSION}
 
 RUN set -xe \
     # APCu
@@ -89,18 +93,20 @@ RUN set -ex \
     gpg --keyserver keyserver.pgp.com --recv-keys "$key" ; \
   done
 
-ENV NODE_VERSION 7.10.0
+ARG NODE_VERSION=7.10.1
+ENV NODE_VERSION ${NODE_VERSION}
 
 RUN set -ex \
-  && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
-  && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
+  && curl -SLO "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz" \
+  && curl -SLO "https://nodejs.org/dist/v${NODE_VERSION}/SHASUMS256.txt.asc" \
   && gpg --batch --decrypt --output SHASUMS256.txt SHASUMS256.txt.asc \
-  && grep " node-v$NODE_VERSION-linux-x64.tar.xz\$" SHASUMS256.txt | sha256sum -c - \
-  && tar -xJf "node-v$NODE_VERSION-linux-x64.tar.xz" -C /usr/local --strip-components=1 \
-  && rm "node-v$NODE_VERSION-linux-x64.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt \
+  && grep " node-v${NODE_VERSION}-linux-x64.tar.xz\$" SHASUMS256.txt | sha256sum -c - \
+  && tar -xJf "node-v${NODE_VERSION}-linux-x64.tar.xz" -C /usr/local --strip-components=1 \
+  && rm "node-v${NODE_VERSION}-linux-x64.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt \
   && ln -s /usr/local/bin/node /usr/local/bin/nodejs
 
-ENV YARN_VERSION 0.24.6
+ARG YARN_VERSION=0.27.5
+ENV YARN_VERSION ${YARN_VERSION}
 
 RUN set -ex \
   && for key in \
@@ -110,8 +116,8 @@ RUN set -ex \
     gpg --keyserver pgp.mit.edu --recv-keys "$key" || \
     gpg --keyserver keyserver.pgp.com --recv-keys "$key" ; \
   done \
-  && curl -fSL -o yarn.js "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-legacy-$YARN_VERSION.js" \
-  && curl -fSL -o yarn.js.asc "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-legacy-$YARN_VERSION.js.asc" \
+  && curl -fSL -o yarn.js "https://yarnpkg.com/downloads/${YARN_VERSION}/yarn-legacy-${YARN_VERSION}.js" \
+  && curl -fSL -o yarn.js.asc "https://yarnpkg.com/downloads/${YARN_VERSION}/yarn-legacy-${YARN_VERSION}.js.asc" \
   && gpg --batch --verify yarn.js.asc yarn.js \
   && rm yarn.js.asc \
   && mv yarn.js /usr/local/bin/yarn \
