@@ -12,15 +12,21 @@ Contains:
 - NodeJS + yarn + bower
 
 
-Env variables:
+**Env variables:**
 
-- `ICUVERSION` (default to `58.2`)
-- `ICU_VERSION` (default to `58_2`)
+- `ICU_MAJOR_VERSION` & `ICU_MINOR_VERSION` (default to `58` & `2`)
 - `APCU_VERSION` (default to `4.0.7`)
-- `COMPOSER_ALLOW_SUPERUSER` (default to `1`)
-- `NODE_VERSION` (default to `7.10.0`)
+- `NODE_VERSION` (default to `7.10.1`)
 - `YARN_VERSION` (default to `0.24.6`)
 
-#Notes
+Define env variables can be changed on build   
+For example to update nodejs to version 8.x :
+````
+docker build /path/to/Dockerfile/directory --build-arg NODE_VERSION=8.1.4 -t web
+````
+
+
+**Notes**
 
 - Symfony `sf` alias to `php bin/console`
+
