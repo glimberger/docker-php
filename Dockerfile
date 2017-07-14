@@ -37,9 +37,13 @@ RUN set -xe \
     && docker-php-ext-configure intl --with-icu-dir=/usr/local \
     && docker-php-ext-install intl
 
+ARG APCU_VERSION=5.1.6
+ENV APCU_VERSION ${APCU_VERSION}
+
 RUN set -xe \
     # APCu
-    && docker-php-ext-install apcu \
+    && pecl install apcu-${APCU_VERSION} \
+    && docker-php-ext-enable apcu \
 
     # opcache extension
     && docker-php-ext-install opcache \
