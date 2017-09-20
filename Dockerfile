@@ -37,7 +37,7 @@ RUN set -xe \
     && docker-php-ext-configure intl --with-icu-dir=/usr/local \
     && docker-php-ext-install intl
 
-ARG APCU_VERSION=5.1.6
+ARG APCU_VERSION=5.1.8
 ENV APCU_VERSION ${APCU_VERSION}
 
 RUN set -xe \
