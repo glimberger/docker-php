@@ -1,7 +1,6 @@
-FROM php:5.6.30-apache
+FROM php:7.1.9-apache
 
 LABEL maintainer "Guillaume Limberger <glim.dev@gmail.com>"
-
 
 # Apache
 # Enable rewrite module
@@ -38,7 +37,7 @@ RUN set -xe \
     && docker-php-ext-configure intl --with-icu-dir=/usr/local \
     && docker-php-ext-install intl
 
-ARG APCU_VERSION=4.0.7
+ARG APCU_VERSION=5.1.8
 ENV APCU_VERSION ${APCU_VERSION}
 
 RUN set -xe \
@@ -94,6 +93,7 @@ RUN set -ex \
   done
 
 ARG NODE_VERSION=7.10.1
+#ARG NODE_VERSION=8.1.4
 ENV NODE_VERSION ${NODE_VERSION}
 
 RUN set -ex \
@@ -105,23 +105,11 @@ RUN set -ex \
   && rm "node-v${NODE_VERSION}-linux-x64.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt \
   && ln -s /usr/local/bin/node /usr/local/bin/nodejs
 
-ARG YARN_VERSION=0.27.5
+ARG YARN_VERSION=1.0.2
 ENV YARN_VERSION ${YARN_VERSION}
 
 RUN set -ex \
-  && for key in \
-    6A010C5166006599AA17F08146C2130DFD2497F5 \
-  ; do \
-    gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key" || \
-    gpg --keyserver pgp.mit.edu --recv-keys "$key" || \
-    gpg --keyserver keyserver.pgp.com --recv-keys "$key" ; \
-  done \
-  && curl -fSL -o yarn.js "https://yarnpkg.com/downloads/${YARN_VERSION}/yarn-legacy-${YARN_VERSION}.js" \
-  && curl -fSL -o yarn.js.asc "https://yarnpkg.com/downloads/${YARN_VERSION}/yarn-legacy-${YARN_VERSION}.js.asc" \
-  && gpg --batch --verify yarn.js.asc yarn.js \
-  && rm yarn.js.asc \
-  && mv yarn.js /usr/local/bin/yarn \
-  && chmod +x /usr/local/bin/yarn
+   && curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version $YARN_VERSION
 
 COPY ./php.ini /usr/local/etc/php/
 
