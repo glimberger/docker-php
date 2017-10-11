@@ -9,25 +9,22 @@ Contains:
 
 - PHP (from official [php-apache](https://hub.docker.com/_/php/)) with extensions (mysql , pgsql, opcache, intl, apcu, xdebug)
 - Apache 2 httpd
-- Composer
-- NodeJS + yarn + bower
+- Composer + [hirak/prestissimo plugin](https://github.com/hirak/prestissimo)
+- Node.js (LTS v6.11.4) + yarn (v1.2.0) + gulp
 
 
 **Env variables:**
 
 - `ICU_MAJOR_VERSION` & `ICU_MINOR_VERSION` (default to `58` & `2`)
 - `APCU_VERSION` (default to `4.0.7`)
-- `NODE_VERSION` (default to `7.10.1`)
-- `YARN_VERSION` (default to `0.24.6`)
+- `NODE_VERSION` (default to `6.11.4`)
+- `YARN_VERSION` (default to `1.2.0`)
+- `XDEBUG_REMOTE_HOST` (default to `localhost`) must be set to your machine IP
 
-Define env variables can be changed on build   
-For example to update nodejs to version 8.x :
+Env variables can be set on build   
+For example to update Node.js to version 8.6.0 :
 ````
-docker build /path/to/Dockerfile/directory --build-arg NODE_VERSION=8.1.4 -t web
+docker build /path/to/Dockerfile/directory --build-arg NODE_VERSION=8.6.0 -t myapp
 ````
 
-
-**Notes**
-
-- Symfony `sf` alias to `php bin/console`
 
