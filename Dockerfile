@@ -105,7 +105,7 @@ RUN set -xe \
 
 
 # YARN -----------------------------------------------------------------------------------------------------------------
-ARG YARN_VERSION=1.2.0
+ARG YARN_VERSION=1.2.1
 ENV YARN_VERSION ${YARN_VERSION}
 
 COPY ./docker-install-yarn.sh /usr/local/bin/install-yarn
