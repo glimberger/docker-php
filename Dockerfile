@@ -89,8 +89,12 @@ RUN set -xe \
     && mkdir -p /var/www/.composer \
     && chown -R www-data: /var/www/.composer \
     && mkdir -p /root/.composer \
-    && chown -R www-data: /root/.composer \
-    && composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress --no-suggest --optimize-autoloader --classmap-authoritative
+    && chown -R www-data: /root/.composer
+
+# https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
+ENV COMPOSER_ALLOW_SUPERUSER 1
+
+RUN composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress --no-suggest --optimize-autoloader --classmap-authoritative
 # end COMPOSER ---------------------------------------------------------------------------------------------------------
 
 
