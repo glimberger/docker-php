@@ -84,7 +84,8 @@ COPY ./docker-install-composer.sh /usr/local/bin/install-composer
 RUN set -xe \
     && chmod +x /usr/local/bin/install-composer \
     && install-composer \
-    && mv composer.phar /usr/local/bin/composer \
+    && mv composer.phar /usr/local/bin/composer
+RUN set -xe \
     && chown -R www-data: /var/www \
     && mkdir -p /var/www/.composer \
     && chown -R www-data: /var/www/.composer \
