@@ -1,3 +1,8 @@
+[![Docker Pulls](https://img.shields.io/docker/pulls/gl1m/docker-php.svg)](https://hub.docker.com/r/gl1m/docker-php/)
+[![Docker Automated build](https://img.shields.io/docker/automated/gl1m/docker-php.svg)](https://hub.docker.com/r/gl1m/docker-php/)
+[![Docker Build Status](https://img.shields.io/docker/build/gl1m/docker-php.svg)](https://hub.docker.com/r/gl1m/docker-php/)
+[![GitHub last commit](https://img.shields.io/github/last-commit/glimberger/docker-php.svg)](https://github.com/glimberger/docker-php)
+
 #Supported tags and respective `Dockerfile` link
 
 - [`latest` (*master/Dockerfile*)](https://github.com/glimberger/docker-php/blob/master/Dockerfile))
