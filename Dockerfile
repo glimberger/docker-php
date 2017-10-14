@@ -33,28 +33,30 @@ ENV LC_ALL fr_FR.UTF-8
 # end LOCALE -----------------------------------------------------------------------------------------------------------
 
 
-# PGSQL LDAP XDEBUG OPCACHE LDAP ---------------------------------------------------------------------------------------
+# PGSQL LDAP XDEBUG OPCACHE BCMATH MBSTRING LDAP ---------------------------------------------------------------------------------------
 # https://github.com/docker-library/php/issues/75#issuecomment-82075678
 RUN set -xe \
-    && docker-php-ext-install pgsql pdo_pgsql \
+    && docker-php-ext-install \
+        pgsql \
+        pdo_pgsql \
     && pecl install xdebug \
 	&& docker-php-ext-enable xdebug \
-    && docker-php-ext-install opcache \
+    && docker-php-ext-install \
+        opcache \
+        bcmath \
+        mbstring \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu \
     && docker-php-ext-install ldap
-# end PGSQL LDAP XDEBUG OPCACHE LDAP -----------------------------------------------------------------------------------
+# end PGSQL LDAP XDEBUG OPCACHE BCMATH MBSTRING LDAP -----------------------------------------------------------------------------------
 
 
 # ICU ------------------------------------------------------------------------------------------------------------------
 ARG ICU_MAJOR_VERSION=58
-ENV ICU_MAJOR_VERSION ${ICU_MAJOR_VERSION}
-
 ARG ICU_MINOR_VERSION=2
-ENV ICU_MINOR_VERSION ${ICU_MINOR_VERSION}
 
 # https://github.com/docker-library/php/issues/307#issuecomment-262491765
 RUN set -xe \
-    && curl -sS -o /tmp/icu.tar.gz -L http://download.icu-project.org/files/icu4c/${ICU_MAJOR_VERSION}.${ICU_MINOR_VERSION}/icu4c-${ICU_MAJOR_VERSION}_${ICU_MINOR_VERSION}-src.tgz \
+    && curl -sS -o /tmp/icu.tar.gz -L http://download.icu-project.org/files/icu4c/$ICU_MAJOR_VERSION.$ICU_MINOR_VERSION/icu4c-${ICU_MAJOR_VERSION}_${ICU_MINOR_VERSION}-src.tgz \
     && tar -zxf /tmp/icu.tar.gz -C /tmp \
     && cd /tmp/icu/source \
     && ./configure --prefix=/usr/local \
@@ -67,10 +69,9 @@ RUN set -xe \
 
 # APCU -----------------------------------------------------------------------------------------------------------------
 ARG APCU_VERSION=5.1.8
-ENV APCU_VERSION ${APCU_VERSION}
 
 RUN set -xe \
-    && pecl install apcu-${APCU_VERSION} \
+    && pecl install apcu-$APCU_VERSION \
     && docker-php-ext-enable apcu
 # end APCU -------------------------------------------------------------------------------------------------------------
 
@@ -95,7 +96,6 @@ RUN set -xe \
 
 # NODEJS ---------------------------------------------------------------------------------------------------------------
 ARG NODE_VERSION=6.11.4
-ENV NODE_VERSION ${NODE_VERSION}
 
 COPY ./docker-install-node.sh /usr/local/bin/install-node
 RUN set -xe \
@@ -106,7 +106,6 @@ RUN set -xe \
 
 # YARN -----------------------------------------------------------------------------------------------------------------
 ARG YARN_VERSION=1.2.1
-ENV YARN_VERSION ${YARN_VERSION}
 
 COPY ./docker-install-yarn.sh /usr/local/bin/install-yarn
 RUN set -ex \
@@ -117,7 +116,6 @@ RUN set -ex \
 
 # PHP INI --------------------------------------------------------------------------------------------------------------
 ARG XDEBUG_REMOTE_HOST=localhost
-ENV XDEBUG_REMOTE_HOST ${XDEBUG_REMOTE_HOST}
 COPY ./php.ini /usr/local/etc/php/
-RUN echo 'xdebug.remote_host=${XDEBUG_REMOTE_HOST}' >> /usr/local/etc/php/php.ini
+RUN echo "xdebug.remote_host=" $XDEBUG_REMOTE_HOST >> /usr/local/etc/php/php.ini
 # end PHP INI
