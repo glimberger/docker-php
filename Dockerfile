@@ -84,13 +84,18 @@ COPY ./docker-install-composer.sh /usr/local/bin/install-composer
 RUN set -xe \
     && chmod +x /usr/local/bin/install-composer \
     && install-composer \
-    && mv composer.phar /usr/local/bin/composer \
+    && mv composer.phar /usr/local/bin/composer
+RUN set -xe \
     && chown -R www-data: /var/www \
     && mkdir -p /var/www/.composer \
     && chown -R www-data: /var/www/.composer \
     && mkdir -p /root/.composer \
-    && chown -R www-data: /root/.composer \
-    && composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress --no-suggest --optimize-autoloader --classmap-authoritative
+    && chown -R www-data: /root/.composer
+
+# https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
+ENV COMPOSER_ALLOW_SUPERUSER 1
+
+RUN composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress --no-suggest --optimize-autoloader --classmap-authoritative
 # end COMPOSER ---------------------------------------------------------------------------------------------------------
 
 
