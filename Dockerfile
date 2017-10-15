@@ -78,13 +78,10 @@ RUN set -xe \
 
 # COMPOSER -------------------------------------------------------------------------------------------------------------
 COPY ./docker-install-composer.sh /usr/local/bin/install-composer
-RUN set -xe \
-    && chmod +x /usr/local/bin/install-composer
+RUN chmod +x /usr/local/bin/install-composer
 RUN set -xe \
     && install-composer
-RUN set -xe \
-    && mv composer.phar /usr/local/bin/composer
-RUN set -xe \
+RUN mv composer.phar /usr/local/bin/composer \
     && chown -R www-data: /var/www \
     && mkdir -p /var/www/.composer \
     && chown -R www-data: /var/www/.composer \
@@ -102,8 +99,8 @@ RUN composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress
 ARG NODE_VERSION=6.11.4
 
 COPY ./docker-install-node.sh /usr/local/bin/install-node
+RUN chmod +x /usr/local/bin/install-node
 RUN set -xe \
-    && chmod +x /usr/local/bin/install-node \
     && install-node
 # end NODEJS -----------------------------------------------------------------------------------------------------------
 
