@@ -77,13 +77,12 @@ RUN set -xe \
 
 
 # COMPOSER -------------------------------------------------------------------------------------------------------------
-# https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
-ENV COMPOSER_ALLOW_SUPERUSER 1
-
 COPY ./docker-install-composer.sh /usr/local/bin/install-composer
 RUN set -xe \
-    && chmod +x /usr/local/bin/install-composer \
-    && install-composer \
+    && chmod +x /usr/local/bin/install-composer
+RUN set -xe \
+    && install-composer
+RUN set -xe \
     && mv composer.phar /usr/local/bin/composer
 RUN set -xe \
     && chown -R www-data: /var/www \
