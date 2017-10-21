@@ -7,6 +7,10 @@ LABEL maintainer="Guillaume Limberger <glim.dev@gmail.com>"
 # Enable rewrite module
 RUN a2enmod rewrite
 
+# Fix server's fully qualified domain name
+ARG APACHE_SERVERNAME=localhost
+RUN echo "ServerName" $APACHE_SERVERNAME >> /etc/apache2/apache2.conf
+
 # COMMON ---------------------------------------------------------------------------------------------------------------
 RUN set -xe \
     && apt-get update \
