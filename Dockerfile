@@ -55,10 +55,11 @@ RUN set -xe \
 
 
 # ICU ------------------------------------------------------------------------------------------------------------------
-ARG ICU_MAJOR_VERSION=58
-ARG ICU_MINOR_VERSION=2
+ARG ICU_MAJOR_VERSION=59
+ARG ICU_MINOR_VERSION=1
 
 # https://github.com/docker-library/php/issues/307#issuecomment-262491765
+# https://github.com/docker-library/php/issues/455#issuecomment-309921509
 RUN set -xe \
     && curl -sS -o /tmp/icu.tar.gz -L http://download.icu-project.org/files/icu4c/$ICU_MAJOR_VERSION.$ICU_MINOR_VERSION/icu4c-${ICU_MAJOR_VERSION}_${ICU_MINOR_VERSION}-src.tgz \
     && tar -zxf /tmp/icu.tar.gz -C /tmp \
@@ -66,6 +67,12 @@ RUN set -xe \
     && ./configure --prefix=/usr/local \
     && make \
     && make install \
+    && rm -rf /tmp/icu*
+
+# PHP_CPPFLAGS are used by the docker-php-ext-* scripts
+ENV PHP_CPPFLAGS="$PHP_CPPFLAGS -std=c++11"
+
+RUN set -xe \
     && docker-php-ext-configure intl --with-icu-dir=/usr/local \
     && docker-php-ext-install intl
 # end ICU --------------------------------------------------------------------------------------------------------------
