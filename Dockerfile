@@ -37,21 +37,21 @@ ENV LC_ALL fr_FR.UTF-8
 # end LOCALE -----------------------------------------------------------------------------------------------------------
 
 
-# PGSQL LDAP XDEBUG OPCACHE BCMATH MBSTRING LDAP ---------------------------------------------------------------------------------------
+# PGSQL LDAP XDEBUG OPCACHE BCMATH MBSTRING APCU LDAP ------------------------------------------------------------------
 # https://github.com/docker-library/php/issues/75#issuecomment-82075678
 RUN set -xe \
     && docker-php-ext-install \
         pgsql \
         pdo_pgsql \
-    && pecl install xdebug \
-	&& docker-php-ext-enable xdebug \
+    && pecl install xdebug apcu \
+	&& docker-php-ext-enable xdebug apcu \
     && docker-php-ext-install \
         opcache \
         bcmath \
         mbstring \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu \
     && docker-php-ext-install ldap
-# end PGSQL LDAP XDEBUG OPCACHE BCMATH MBSTRING LDAP -----------------------------------------------------------------------------------
+# end PGSQL LDAP XDEBUG OPCACHE BCMATH MBSTRING LDAP APCU --------------------------------------------------------------
 
 
 # ICU ------------------------------------------------------------------------------------------------------------------
@@ -76,15 +76,6 @@ RUN set -xe \
     && docker-php-ext-configure intl --with-icu-dir=/usr/local \
     && docker-php-ext-install intl
 # end ICU --------------------------------------------------------------------------------------------------------------
-
-
-# APCU -----------------------------------------------------------------------------------------------------------------
-ARG APCU_VERSION=5.1.8
-
-RUN set -xe \
-    && pecl install apcu-$APCU_VERSION \
-    && docker-php-ext-enable apcu
-# end APCU -------------------------------------------------------------------------------------------------------------
 
 
 # COMPOSER -------------------------------------------------------------------------------------------------------------
