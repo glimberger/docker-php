@@ -11,6 +11,7 @@ RUN a2enmod rewrite
 ARG APACHE_SERVERNAME=localhost
 RUN echo "ServerName" $APACHE_SERVERNAME >> /etc/apache2/apache2.conf
 
+
 # COMMON ---------------------------------------------------------------------------------------------------------------
 RUN set -xe \
     && apt-get update \
@@ -118,7 +119,6 @@ RUN set -ex \
 
 
 # PHP INI --------------------------------------------------------------------------------------------------------------
-ARG XDEBUG_REMOTE_HOST=localhost
-COPY ./php.ini /usr/local/etc/php/
-RUN echo "xdebug.remote_host=" $XDEBUG_REMOTE_HOST >> /usr/local/etc/php/php.ini
-# end PHP INI
+ARG PHP_INI=php.ini
+COPY $PHP_INI /usr/local/etc/php/
+# end PHP INI ----------------------------------------------------------------------------------------------------------
