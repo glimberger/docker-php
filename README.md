@@ -20,15 +20,19 @@ Contains:
 
 **Build args:**
 
-- `ICU_MAJOR_VERSION` & `ICU_MINOR_VERSION` (default to `58` & `2`)
-- `APCU_VERSION` (default to `4.0.7`)
 - `NODE_VERSION` (default to `6.11.4`)
 - `YARN_VERSION` (default to `1.2.1`)
-- `XDEBUG_REMOTE_HOST` (default to `localhost`) must be set to your machine IP
+- `PHP_INI` path to user-defined INI file (see [default user-defined php.ini](https://github.com/glimberger/docker-php/blob/master/php.ini))
 
-For example to update Node.js to version 8.6.0 :
+**Example:**
+
+To update Node.js to version 8.6.0:
 ````
 docker build /path/to/Dockerfile/directory --build-arg NODE_VERSION=8.6.0 -t myapp
+````
+To replace the user-defined INI file:
+````
+docker build /path/to/Dockerfile/directory --build-arg PHP_INI=php.ini -t myapp
 ````
 
 **Docker compose**
