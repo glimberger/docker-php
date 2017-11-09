@@ -102,8 +102,8 @@ RUN composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress
 ARG NODE_VERSION=8.9.1
 
 COPY ./docker-install-node.sh /usr/local/bin/install-node
-RUN chmod +x /usr/local/bin/install-node \
-    && install-node
+RUN chmod +x /usr/local/bin/install-node
+RUN install-node
 # end NODEJS -----------------------------------------------------------------------------------------------------------
 
 
