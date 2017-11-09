@@ -15,7 +15,7 @@ Contains:
 - PHP (from official [php-apache](https://hub.docker.com/_/php/)) with extensions (mysql , pgsql, opcache, intl, apcu, xdebug)
 - Apache 2 httpd
 - [Composer](https://getcomposer.org/) + [hirak/prestissimo plugin](https://github.com/hirak/prestissimo)
-- [Node.js](https://nodejs.org/en/) (LTS v6.11.4) + [yarn](https://yarnpkg.com/lang/en/) (v1.2.0) + gulp
+- [Node.js](https://nodejs.org/en/) + [yarn](https://yarnpkg.com/lang/en/) + gulp
 
 
 **Build args:**
