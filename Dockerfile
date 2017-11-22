@@ -99,12 +99,11 @@ RUN composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress
 
 
 # NODEJS ---------------------------------------------------------------------------------------------------------------
-ARG NODE_VERSION=6.11.4
+ARG NODE_VERSION=8.9.1
 
 COPY ./docker-install-node.sh /usr/local/bin/install-node
 RUN chmod +x /usr/local/bin/install-node
-RUN set -xe \
-    && install-node
+RUN install-node
 # end NODEJS -----------------------------------------------------------------------------------------------------------
 
 
@@ -112,8 +111,7 @@ RUN set -xe \
 ARG YARN_VERSION=1.3.2
 
 COPY ./docker-install-yarn.sh /usr/local/bin/install-yarn
-RUN chmod +x /usr/local/bin/install-yarn
-RUN set -ex \
+RUN chmod +x /usr/local/bin/install-yarn \
    && install-yarn
 # end YARN -------------------------------------------------------------------------------------------------------------
 
