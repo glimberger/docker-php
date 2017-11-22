@@ -109,7 +109,7 @@ RUN set -xe \
 
 
 # YARN -----------------------------------------------------------------------------------------------------------------
-ARG YARN_VERSION=1.2.1
+ARG YARN_VERSION=1.3.2
 
 COPY ./docker-install-yarn.sh /usr/local/bin/install-yarn
 RUN chmod +x /usr/local/bin/install-yarn

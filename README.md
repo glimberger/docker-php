@@ -21,7 +21,7 @@ Contains:
 **Build args:**
 
 - `NODE_VERSION` (default to `6.11.4`)
-- `YARN_VERSION` (default to `1.2.1`)
+- `YARN_VERSION` (default to `1.3.2`)
 - `PHP_INI` path to user-defined INI file (see [default user-defined php.ini](https://github.com/glimberger/docker-php/blob/master/php.ini))
 
 **Example:**
