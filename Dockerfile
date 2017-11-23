@@ -108,11 +108,12 @@ RUN install-node
 
 
 # YARN -----------------------------------------------------------------------------------------------------------------
-ARG YARN_VERSION=1.3.2
+ARG YARN_VERSION=1.3.1
 
 COPY ./docker-install-yarn.sh /usr/local/bin/install-yarn
-RUN chmod +x /usr/local/bin/install-yarn \
-   && install-yarn
+RUN chmod +x /usr/local/bin/install-yarn
+RUN set -xe \
+    && install-yarn
 # end YARN -------------------------------------------------------------------------------------------------------------
 
 
