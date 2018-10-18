@@ -5,9 +5,9 @@
 
 #Supported tags and respective `Dockerfile` link
 
-- [`latest` (*master/Dockerfile*)](https://github.com/glimberger/docker-php/blob/master/Dockerfile))
-- [`php 5.6 - apache` (*php5.6-apache/Dockerfile*)](https://github.com/glimberger/docker-php/blob/php5.6-apache/Dockerfile))
-- [`php 7.1 - apache` (*php7.1-apache/Dockerfile*)](https://github.com/glimberger/docker-php/blob/php7.1-apache/Dockerfile))
+- [`latest` `php7.2-apache` (*master/Dockerfile*)](https://github.com/glimberger/docker-php/blob/master/Dockerfile))
+- [`php5.6-apache` (*php5.6-apache/Dockerfile*)](https://github.com/glimberger/docker-php/blob/php5.6-apache/Dockerfile))
+- [`php7.1-apache` (*php7.1-apache/Dockerfile*)](https://github.com/glimberger/docker-php/blob/php7.1-apache/Dockerfile))
 
 
 Contains:
@@ -15,13 +15,13 @@ Contains:
 - PHP (from official [php-apache](https://hub.docker.com/_/php/)) with extensions (mysql , pgsql, opcache, intl, apcu, xdebug)
 - Apache 2 httpd
 - [Composer](https://getcomposer.org/) + [hirak/prestissimo plugin](https://github.com/hirak/prestissimo)
-- [Node.js](https://nodejs.org/en/) + [yarn](https://yarnpkg.com/lang/en/) + gulp
+- [Node.js](https://nodejs.org/en/) + [yarn](https://yarnpkg.com/lang/en/) + webpack
 
 
 **Build args:**
 
-- `NODE_VERSION` (default to `6.11.4`)
-- `YARN_VERSION` (default to `1.3.2`)
+- `NODE_VERSION` (default to `10.11.0`)
+- `YARN_VERSION` (default to `1.11.1`)
 - `PHP_INI` path to user-defined INI file (see [default user-defined php.ini](https://github.com/glimberger/docker-php/blob/master/php.ini))
 
 **Example:**
