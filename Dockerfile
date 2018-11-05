@@ -118,7 +118,7 @@ RUN npm -v
 
 
 # YARN -----------------------------------------------------------------------------------------------------------------
-ARG YARN_VERSION=1.10.1
+ARG YARN_VERSION=1.12.1
 
 COPY ./docker-install-yarn.sh /usr/local/bin/install-yarn
 RUN chmod +x /usr/local/bin/install-yarn
