@@ -101,7 +101,7 @@ RUN composer global require "hirak/prestissimo" --prefer-dist --no-progress --no
 
 
 # NODEJS NVM ---------------------------------------------------------------------------------------------------------------
-ARG NODE_VERSION=10.11.0
+ARG NODE_VERSION=10.13.0
 ARG NVM_DIR=/usr/local/nvm
 
 # https://github.com/creationix/nvm#install-script
