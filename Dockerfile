@@ -60,7 +60,7 @@ RUN set -xe \
 
 
 # ICU ------------------------------------------------------------------------------------------------------------------
-ARG ICU_MAJOR_VERSION=61
+ARG ICU_MAJOR_VERSION=63
 ARG ICU_MINOR_VERSION=1
 
 # https://github.com/docker-library/php/issues/307#issuecomment-262491765
