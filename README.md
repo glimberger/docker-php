@@ -5,7 +5,7 @@
 
 #Supported tags and respective `Dockerfile` link
 
-- [`latest` `php7.2-apache` (*master/Dockerfile*)](https://github.com/glimberger/docker-php/blob/master/Dockerfile))
+- [`latest` `php7.3-apache` (*master/Dockerfile*)](https://github.com/glimberger/docker-php/blob/master/Dockerfile))
 - [`php5.6-apache` (*php5.6-apache/Dockerfile*)](https://github.com/glimberger/docker-php/blob/php5.6-apache/Dockerfile))
 - [`php7.1-apache` (*php7.1-apache/Dockerfile*)](https://github.com/glimberger/docker-php/blob/php7.1-apache/Dockerfile))
 
@@ -20,8 +20,8 @@ Contains:
 
 **Build args:**
 
-- `NODE_VERSION` (default to `10.11.0`)
-- `YARN_VERSION` (default to `1.11.1`)
+- `NODE_VERSION` (default to `10.13.0`)
+- `YARN_VERSION` (default to `1.16.0`)
 - `PHP_INI` path to user-defined INI file (see [default user-defined php.ini](https://github.com/glimberger/docker-php/blob/master/php.ini))
 
 **Example:**
