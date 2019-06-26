@@ -27,6 +27,7 @@ RUN set -xe \
         libldap2-dev \
         libzip-dev \
         zip \
+        libxml2-dev \
     && apt-get clean
 # end COMMON -----------------------------------------------------------------------------------------------------------
 
@@ -55,7 +56,9 @@ RUN set -xe \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu \
     && docker-php-ext-install ldap \
     && docker-php-ext-configure zip --with-libzip \
-    && docker-php-ext-install zip
+    && docker-php-ext-install zip \
+    && docker-php-ext-configure soap --enable-soap \
+    && docker-php-ext-install soap
 # end PGSQL LDAP XDEBUG OPCACHE BCMATH MBSTRING LDAP APCU ZIP ----------------------------------------------------------
 
 
