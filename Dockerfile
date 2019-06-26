@@ -25,7 +25,8 @@ RUN set -xe \
         libicu-dev \
         libpq-dev \
         libldap2-dev \
-        zlib1g-dev \
+        libzip-dev \
+        zip \
     && apt-get clean
 # end COMMON -----------------------------------------------------------------------------------------------------------
 
@@ -45,7 +46,6 @@ RUN set -xe \
     && docker-php-ext-install \
         pgsql \
         pdo_pgsql \
-        zip \
     && pecl install xdebug apcu \
 	&& docker-php-ext-enable xdebug apcu \
     && docker-php-ext-install \
@@ -53,7 +53,9 @@ RUN set -xe \
         bcmath \
         mbstring \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu \
-    && docker-php-ext-install ldap
+    && docker-php-ext-install ldap \
+    && docker-php-ext-configure zip --with-libzip \
+    && docker-php-ext-install zip
 # end PGSQL LDAP XDEBUG OPCACHE BCMATH MBSTRING LDAP APCU ZIP ----------------------------------------------------------
 
 
